@@ -46,7 +46,7 @@ class UploadVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                             //DATABASE
                             let firestoreDatabase = Firestore.firestore()
                             var firestoreRef: DocumentReference? = nil
-                            let firestorePost = ["imageUrl": imageUrlString!, "user_email": Auth.auth().currentUser!.email!, "createdAt": FieldValue.serverTimestamp(), "post_comment": self.commandTextField.text ?? "", "likes": 0] as [String : Any]
+                            let firestorePost = ["user_id": Auth.auth().currentUser!.uid, "imageUrl": imageUrlString!, "user_email": Auth.auth().currentUser!.email!, "createdAt": FieldValue.serverTimestamp(), "post_comment": self.commandTextField.text ?? "", "likes": 0] as [String : Any]
                             
                             firestoreRef = firestoreDatabase.collection("insta").addDocument(data: firestorePost, completion: { (error) in
                                 if error != nil {

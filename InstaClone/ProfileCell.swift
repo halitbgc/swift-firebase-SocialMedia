@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class ProfileCell: UITableViewCell {
 
+    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var documentId: UILabel!
+    @IBOutlet weak var profileImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,4 +24,14 @@ class ProfileCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func deleteClicked(_ sender: Any) {
+        let firestore = Firestore.firestore()
+        
+        firestore.collection("insta").document(documentId.text!).delete { err in
+            if  err != nil {
+                print("Error")
+            }
+        }
+        
+    }
 }
